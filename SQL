@@ -1,0 +1,45 @@
+https://blog.csdn.net/yongh701/article/details/50467129      
+https://blog.csdn.net/benjaminyoung29/article/details/79442770           //C#数据库  
+
+ form1>>增删改                                        form2>>增删改
+ {                                                   {
+      listview1                                           textbox1 员工号      textbox2 姓名     textbox3 年龄
+      button1 添加                                         panel1.radiobutton1 男      panel1.radiobutton1 女       
+      button2 修改                                         button1 确定         button2  取消 
+      button3 删除                                    }
+ }
+ form1>>根据 【员工号或员工名】 查找员工所在 【公司名和工资】
+ {
+      listview2
+      combobox1 员工号    button4 查询
+      combobox2 员工名    button5 查询
+      @"select [EMPLOYEE].[EmpNo],[EMPLOYEE].[EmpName],[COMPANY].[CmpName],[WORKS].[Salary] from [EMPLOYEE],[COMPANY],[WORKS]" +
+            " where [EMPLOYEE].[EmpNo]=[WORKS].[EmpNo]" +
+            " and [COMPANY].[CmpNo]=[WORKS].[CmpNo]" +
+            " and [EMPLOYEE].[EmpNo]='" + comboBox1.Text + "'"
+ }
+ form1>>统计至少为40岁的员工的总工资，从大到小排列desc(升序是asc)
+ {
+      listview3
+      @"select [EMPLOYEE].[EmpNo] , [EMPLOYEE].[EmpName] , [EMPLOYEE].[EmpSex] , [EMPLOYEE].[EmpAge] , sum([WORKS].[Salary]) as '总工资' " +
+                " from [EMPLOYEE],[WORKS]" +
+                " where [EMPLOYEE].[EmpAge]>=40" +
+                " and [EMPLOYEE].[EmpNo]=[WORKS].[EmpNo]" +
+                " group by [EMPLOYEE].[EmpNo],[EMPLOYEE].[EmpName],[EMPLOYEE].[EmpSex],[EMPLOYEE].[EmpAge]" +
+                " order by '总工资' desc"
+ }
+ form1>>查询至少具有两份工作员工的姓名和其公司名
+ {     
+      listview4
+      @"select [EMPLOYEE].[EmpName],[COMPANY].[CmpName] 
+            from [EMPLOYEE],[COMPANY],[WORKS],(select [EmpName],count([CmpName]) as 'CmpNum'" +
+            " from [EMPLOYEE],[WORKS],[COMPANY]" +
+            " where [EMPLOYEE].[EmpNo]=[WORKS].[EmpNo]" +
+            " and [COMPANY].[CmpNo]=[WORKS].[CmpNo]" +
+            " group by [EmpName]" +
+            " having count([CmpName])>1 ) as t1" +
+            " where [EMPLOYEE].[EmpNo]=[WORKS].[EmpNo]" +
+            " and [COMPANY].[CmpNo]=[WORKS].[CmpNo]" +
+            " and [EMPLOYEE].[EmpName]=t1.[EmpName]"
+ }
+ 

@@ -1,5 +1,7 @@
 https://blog.csdn.net/yongh701/article/details/50467129      
-https://blog.csdn.net/benjaminyoung29/article/details/79442770           //C#数据库  
+https://blog.csdn.net/benjaminyoung29/article/details/79442770           //C#数据库 
+
+https://blog.csdn.net/qiqi123i/article/details/79642696
 
  form1>>增删改                                        form2>>增删改
  {                                                   {
